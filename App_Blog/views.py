@@ -79,6 +79,19 @@ def meus_posts(request):
     error_message = 'Nome ou senha inválidos'
     return render(request, 'login.html', {'error_message': error_message})
 
+def editar_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'editar_post.html', {'form': form, 'post': post})
+
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.user == post.author:

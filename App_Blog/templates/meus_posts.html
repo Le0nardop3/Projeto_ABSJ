@@ -6,8 +6,9 @@
     <div class="Estrutura_inicio"><br>
         <ion-icon class="person_image" name="person-circle-outline"></ion-icon>
         <h1>{% if user.is_authenticated %}{{ user.username }}{% endif %}</h1><br>
-        <p><button class="publicar"><a class="link"href="{% url 'logout' %}">Sair</a></button></p><br>
-        <p>faça uma nova publicação: <button class="publicar"><a class="link"href="{% url 'publicar' %}">Publicar</a></button></p>
+        <p><button class="publicar"><a class="link" href="{% url 'logout' %}">Sair</a></button></p><br>
+        <p>faça uma nova publicação: <button class="publicar"><a class="link"
+                    href="{% url 'publicar' %}">Publicar</a></button></p>
         <br><br>
     </div><br><br>
     <h2>Seus Posts:</h2>
@@ -29,7 +30,7 @@
                 </div>
                 <div class="linha"></div>
                 <div>
-                    <p>Criador por: {{ post.author }}</p>
+                    <p class="aut">Criador por: {{ post.author }}</p>
                 </div>
                 <div class="data">
                     <p>Publicado em {{ post.published_date }} </p>
@@ -37,6 +38,7 @@
                 <div class="linha"></div>
                 <div>
                     <a href="{% url 'post_detail' post.id %}"><button class="but">Ver</button></a>
+                    <a href="{% url 'editar_post' post.id %}"><button class="but">Editar</button></a>
                     <a href="{% url 'delete_post' post.id %}"><button class="but">Deletar</button></a>
                 </div>
 
@@ -80,7 +82,7 @@
 
     .post-container {
         max-width: 100%;
-        height: 75vh;
+        height: 79vh;
         width: 80vh;
         margin-top: 30px;
         margin-bottom: 30px;
@@ -93,7 +95,7 @@
         align-items: center;
         flex-direction: column;
         border: 2px solid black;
-        height: 70vh;
+        height: 74vh;
     }
 
     .imagem {
@@ -105,6 +107,14 @@
         border-bottom: 2px solid #000;
         width: 80%;
         margin: 8px auto;
+    }
+
+    .aut {
+        font-size: 13px;
+    }
+
+    .data {
+        font-size: 13px;
     }
 
     .texto {
@@ -120,6 +130,8 @@
     .but {
         width: 90px;
         height: 20px;
+        margin-left: 13px;
+        margin-right: 13px;
     }
 
     .person_image {
@@ -150,6 +162,12 @@
 
         .data {
             font-size: 14px;
+        }
+
+        .but {
+            width: 60px;
+            margin-left: 4px;
+            margin-right: 4px;
         }
     }
 </style>
