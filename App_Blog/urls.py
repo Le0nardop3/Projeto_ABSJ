@@ -9,7 +9,6 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name = 'cadastro'),
     path('login/', views.login, name = 'login'),
     path('plataforma/', views.plataforma, name = 'plataforma'),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('logout/', views.logout, name='logout'),
     path('publicar/', publicar, name='publicar'),
     path('meus_posts/', views.meus_posts, name = 'meus_posts'),

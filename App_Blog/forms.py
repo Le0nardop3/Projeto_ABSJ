@@ -1,6 +1,5 @@
 from django import forms
 from .models import Post, Comment
-from PIL import Image
 
 class PostForm(forms.ModelForm):
     class Meta:
