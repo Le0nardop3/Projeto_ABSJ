@@ -17,7 +17,11 @@
                 </div>
                 <div class="linha"></div>
                 <div class="texto">
-                    <p>{{ post.text|safe }}</p>
+                    <p class="texto_post">{{ post.text|slice:":200"|safe }}
+                        {% if post.text|length > 200 %}
+                        <a href="{% url 'post_detail' post.id %}" class="ler_mais"><b>Ler Mais...</b></a>
+                        {% endif %}
+                    </p>
                 </div>
                 <div class="linha"></div>
                 <div class="baixo">
@@ -90,6 +94,15 @@
         max-width: 60vh;
     }
 
+    .texto_post {
+        font-size: 13px;
+    }
+
+    .ler_mais {
+        text-decoration: none;
+        color: black;
+    }
+
     .comentar {
         width: 90px;
         height: 20px;
@@ -98,15 +111,17 @@
     .baixo {
         width: 80%;
         display: flex;
-        align-items: center;    
+        align-items: center;
     }
-    .comentar{
+
+    .comentar {
         height: 4vh;
         margin-left: 7vh;
     }
+
     .data {
-            font-size: 13px;
-        }
+        font-size: 13px;
+    }
 
     @media screen and (max-width: 768px) {
         .post-container {
@@ -129,9 +144,9 @@
             font-size: 13px;
         }
 
-        .comentar{
-        height: 4vh;
-        margin-left: 1vh;
+        .comentar {
+            height: 4vh;
+            margin-left: 1vh;
         }
     }
 </style>

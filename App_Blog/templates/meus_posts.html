@@ -26,7 +26,11 @@
                 </div>
                 <div class="linha"></div>
                 <div class="texto">
-                    <p>{{ post.text|safe }}</p>
+                    <p class="texto_post">{{ post.text|slice:":200"|safe }}
+                        {% if post.text|length > 200 %}
+                        <a href="{% url 'post_detail' post.id %}" class="ler_mais"><b>Ler Mais...</b></a>
+                        {% endif %}
+                    </p>
                 </div>
                 <div class="linha"></div>
                 <div>
@@ -120,6 +124,15 @@
     .texto {
         height: 10vh;
         max-width: 60vh;
+    }
+
+    .texto_post {
+        font-size: 13px;
+    }
+
+    .ler_mais {
+        text-decoration: none;
+        color: black;
     }
 
     .publicar {
