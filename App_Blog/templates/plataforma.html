@@ -38,6 +38,25 @@
         </div>
         {% endfor %}
         {% endblock %}
+
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{ posts.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ posts.number }} de {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">Próxima </a>
+            <a href="?page={{ posts.paginator.num_pages }}">Ultima &raquo;</a>
+            {% endif %}
+        </span>
     </div>
 </section>
 
@@ -121,6 +140,33 @@
 
     .data {
         font-size: 13px;
+    }
+
+    /* Paginação */
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .step-links a {
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        color: #333;
+        background-color: #f1f1f1;
+    }
+
+    .step-links a:hover {
+        background-color: #ddd;
+    }
+
+    .current {
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        background-color: gray;
+        color: white;
     }
 
     @media screen and (max-width: 768px) {

@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+# /home/Leonardop3/.virtualenvs/leonardop3.pythonanywhere.com/lib/python3.8/site-packages/django/forms/fields.py, line 708, in to_python
 
 def home(request):
     return redirect(login)
@@ -52,11 +55,23 @@ def login(request):
             # Caso esteja errado ele mostra o erro
             error_message = 'Nome ou senha inválidos'
             return render(request, 'login.html', {'error_message': error_message})
-# Plaforma do blog
+
 def plataforma(request):
     if request.user.is_authenticated:
-        posts = Post.objects.order_by('-published_date')
-        return render(request, 'plataforma.html',{'posts':posts})
+        post_list = Post.objects.order_by('-published_date')
+        paginator = Paginator(post_list, 8)  # Quantidad de posts por página
+
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # Se a página não é um número, entrega a primeira página.
+            posts = paginator.page(1)
+        except EmptyPage:
+            # Se a página está fora dos limites (e.g., 9999), entrega a última página.
+            posts = paginator.page(paginator.num_pages)
+
+        return render(request, 'plataforma.html', {'posts': posts})
     return redirect(login)
 
 def publicar(request):
