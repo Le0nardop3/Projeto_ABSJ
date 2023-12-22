@@ -37,6 +37,10 @@
             </div>
         </div>
         {% endfor %}
+
+        {% if query and posts.count == 0 %}
+        <p>Nenhum resultado encontrado para "{{ query }}".</p>
+        {% endif %}
         {% endblock %}
 
     </div>
@@ -73,7 +77,7 @@
         width: 95%;
         background-color: rgba(112, 112, 106, 0.274);
         display: flex;
-        min-height: 30vh;
+        min-height: 50vh;
         max-height: 5000vh;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -175,6 +179,10 @@
             width: 85%;
         }
 
+        .post-c {
+            height: 65vh;
+        }
+
         .Atividade {
             width: 110%;
         }
@@ -194,6 +202,15 @@
             height: 4vh;
             margin-left: 1vh;
         }
+
+        .step-links a {
+            padding: 5px 10px;
+        }
+
+        .current {
+            padding: 5px 10px;
+        }
+
     }
 </style>
 
